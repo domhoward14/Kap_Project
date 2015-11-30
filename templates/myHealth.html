@@ -11,9 +11,32 @@
 <script language="Javascript">
 
 </script>
+
+<style>
+#placeholder
+    {
+    width: 1000px;
+    height: 200px;
+    }
+</style>
+
+  <script type="text/javascript">
+  var d1 = {{ List }};
+$(document).ready(function () {
+    $.plot($("#placeholder"), [
+        {
+            data: d1,
+            bars: {
+                show: true
+            }
+        }
+    ]);
+});
+</script>
 {% endblock %}
 
 {% block bodyBlock %}
+
     <div class="col-md-4">
         <h1><strong>Health Planner</strong></h1>
     </div>

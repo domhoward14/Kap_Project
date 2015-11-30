@@ -45,7 +45,7 @@ def CalendarNp(request):
     #When group feature is added make another list for group events and then concatenate
     event_list = events.objects.filter(month=monthNumber, year=year, user=request.user.username )
     workout_list = workouts.objects.filter(user=request.user.username, month=monthNumber, year=year)
-    data = JsonResponse(make_json_dict(event_list))
+   #data = JsonResponse(make_json_dict(event_list))
     nextAddress = "/KAP/Calendar/"+str((int(monthNumber) + 1))+"-"+str(year)
     prevAddress = "/KAP/Calendar/"+str(int(monthNumber) - 1)+"-"+str(year)
     fstDayOfMonth = int(calendar.monthrange(year,int(monthNumber))[0])
@@ -64,7 +64,7 @@ def CalendarNp(request):
     context_dictionary['event_list'] = event_list
     context_dictionary['workout_list'] = workout_list
     context_dictionary['actionUrl'] = actionUrl
-    context_dictionary['data'] = data
+    #context_dictionary['data'] = data
     context_dictionary['month'] = monthNumber
     context_dictionary['year'] = year 
     context_dictionary['username'] = request.user.username 
@@ -123,13 +123,14 @@ def Calendar (request, Date):
     actionUrl = "/kap/Calendar/" + str(monthNumber) + "-" + str(year) +"/"
     json_string = make_json_string(event_list)
     data = json_string
-    data = JsonResponse(make_json_dict(data))
+    #data = JsonResponse(make_json_dict(data))
     context_dictionary = {'monthstr':month, 'yearstr':year, 'fstDayOfMonth':range(fstDayOfMonth+1), 'daysInMonth':daysInMonth }
     context_dictionary['leftOver'] = range(secondWkSp)[1:]
     context_dictionary['startingPoints'] = startingPoints
     context_dictionary['endingPoints'] = endingPoints
     context_dictionary['next'] = nextAddress
     context_dictionary['prev'] = prevAddress
+    context_dictionary['year'] = year
     context_dictionary['actionUrl'] = actionUrl
     context_dictionary['event_list'] = event_list
     context_dictionary['workout_list'] = workout_list
@@ -221,18 +222,18 @@ def getMonthProperties(monthNumber, year):
     else:
         return "Undefined"
 
-def make_json_dict(event_list):
-    dict = {}
-    i = 1
-    for event in event_list:
-        value = []
-        value.insert(0, event.event_name)
-        value.insert(1, event.day)
-        value.insert(2, event.month)
-        value.insert(3, event.year)
-        dict['event_'+str(i)] = value
-        i += 1
-    return dict
+#def make_json_dict(event_list):
+#    dict = {}
+ #   i = 1
+#    for event in event_list:
+     #   value = []
+    #    value.insert(0, event.event_name)
+    #    value.insert(1, event.day)
+ #       value.insert(2, event.month)
+       # value.insert(3, event.year)
+     #   dict['event_'+str(i)] = value
+    #    i += 1
+   # return dict
 
 @login_required
 def Daily(request, Date):
@@ -285,6 +286,7 @@ def myHealthNp (request):
     context_dictionary['day'] = day
     context_dictionary['year'] = year
     context_dictionary['month'] = month
+    context_dictionary['List'] = [1,2,3,4,5]
     generate = 0
     context_dictionary = {}
     #context_dictionary['data'] = data
