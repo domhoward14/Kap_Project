@@ -47,4 +47,4 @@ class workouts(models.Model):
     workout = models.IntegerField(null=True)
 
     class Meta:
-        unique_together = (("month", "day", "year"),)
+        unique_together = (("month", "day", "year","user"),)

@@ -521,10 +521,11 @@ def user_logout(request):
     return HttpResponseRedirect('/kap/')
 
 def Workout(request, Date):
+    user = request.user.username
     day = int(string.split(Date, '-')[0])
     month = int(string.split(Date, '-')[1])
     year = int(string.split(Date, '-')[2])
-    Workout = workouts.objects.get(year=year, day=day, month=month)
+    Workout = workouts.objects.get(year=year, day=day, month=month, user=user)
     context_dictionary = {}
     context_dictionary['day'] = day
     context_dictionary['month'] = month

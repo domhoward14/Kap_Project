@@ -14,10 +14,11 @@ class event(forms.ModelForm):
     notes = forms.CharField(max_length=200)
     user = forms.HiddenInput()
     url = forms.HiddenInput()
+    location= forms.CharField()
     class Meta:
         model = events
 
-        fields = ('event_name', 'day', 'hour', 'min', 'notes',)
+        fields = ('event_name', 'day', 'hour', 'min', 'notes','location')
 
 class workout(ModelForm):
     LARGE = (
